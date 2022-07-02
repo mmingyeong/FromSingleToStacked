@@ -1,4 +1,6 @@
 [flake8]
+exclude =
+    ref
 
 ignore =
     E121,
