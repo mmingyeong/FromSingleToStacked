@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "FromSingleToStacked"
+version = "0.1.0"
+description = ""
+authors = ["mmingyeong <mingyeong@khu.ac.kr>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+flake8 = "^4.0.1"
+pylint = "^2.14.4"
+black = "^22.6.0"
+isort = "^5.10.1"
+Sphinx = "^5.0.2"
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
