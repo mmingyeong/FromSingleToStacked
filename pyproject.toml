@@ -11,6 +11,9 @@ pylint = "^2.14.4"
 black = "^22.6.0"
 isort = "^5.10.1"
 Sphinx = "^5.0.2"
+numpy = "^1.23.1"
+matplotlib = "^3.5.2"
+astropy = "^5.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
