@@ -131,8 +131,6 @@ for i in range(len(cnts_T)):
         BBBB += 1
 print(BBBB)
 
-# cGAN?
-
 HDUF = fits.open("E:\\cGAN\\tsField-004207-2-40-0264.fit")
 
 

@@ -54,6 +54,7 @@ if run == "206":
     single_run = "4207"
 elif run == "106":
     single_run = "4203"
+# Create the command shell file for a single image file with the corresponding condition
 fg = open(
     "D:\\research\\single\\stack%d\\g\\down_g%s_cc%d.sh"
     % (stacked_no, single_run, camcol),
@@ -69,6 +70,9 @@ fi = open(
     % (stacked_no, single_run, camcol),
     "w",
 )
+
+# where is u, z band...?
+
 flist = open(
     "D:\\research\\single\\stack%d\\flist_%s_%s_cc%d.csv"
     % (stacked_no, run, BAND, camcol),
@@ -77,6 +81,7 @@ flist = open(
 
 DOWN_LIST = []
 for i in range(len(RUNS)):
+    # if RUN Number == maximum stacked number
     if len(RUNS[i]) == stacked_no:
         # print(i+62)
         if run == "206":
@@ -90,7 +95,7 @@ for i in range(len(RUNS)):
             DOWN_LIST.append(i + 62 + 4)
             DOWN_LIST.append(i + 62 + 3 + 1)
             DOWN_LIST.append(i + 62 + 4 + 1)
-
+        # the field number within run of the image file to be downloaded
         flist.write("%d\n" % (i + 62))
 DOWN_LIST = sorted(list(set(DOWN_LIST)))
 
@@ -122,8 +127,9 @@ for stacked_no in [34]:
                 sep="\s+",
                 header=None,
             )
-
             for i in range(len(f_g)):
+                # f_r values change
+                # why??
                 f_g.values[i, 1] = f_g.values[i, 1][:-14] + "r" + f_g.values[i, 1][-13:]
             fr = open(
                 "D:\\research\\single\\stack%d\\r\\down_r%s_cc%d.sh"
@@ -134,6 +140,8 @@ for stacked_no in [34]:
                 fr.write("axel -a -n 3 %s\n" % (f_g.values[i, 1]))
             fr.close()
 
+
+# Coadded Field check
 
 T0 = T1 = time.time()
 
@@ -399,4 +407,5 @@ for i in range(len(stack34_N)):
     if stack34_N.values[i, 3] == 1:
         stack34_N_cc1.append(stack34_N.values[i])
 
+# delete stack34_N_cc1
 del stack34_N_cc1
