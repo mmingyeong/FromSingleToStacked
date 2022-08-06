@@ -71,7 +71,7 @@ fi = open(
     "w",
 )
 
-# where is u, z band...?
+# where is u, z band...? -> because bad quality
 
 flist = open(
     "D:\\research\\single\\stack%d\\flist_%s_%s_cc%d.csv"
