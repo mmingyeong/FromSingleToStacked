@@ -23,7 +23,7 @@ np.zeros(0) # create a arrry of length 0 with all value 0
 
 BAND = "g"
 
-h5f = h5py.File("D:\\research\\stacked\\ALL\\stacked_%s_info.h5" % BAND, "w")
+h5f = h5py.File("D:\\research\\stacked\\stacked_%s_info.h5" % BAND, "w")
 T0 = T1 = time.time()
 # run = '206'
 # camcol = 6

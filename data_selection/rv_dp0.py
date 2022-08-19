@@ -7,19 +7,19 @@
 # review data preprocess0 download stacked images.py
 
 # set a wavelength band and south/north for the data
-# the filter used (u, g, r, i, or z)
+# the filter used (g, r, i)
 # DTYPE
 # 100006 == 106 == South strip
 # 200006 == 206 == North strip
 # camera column (1-6)
 
-band = "r"
-DTYPE = "106"
+band = "i"
+DTYPE = "206"
 for CAMCOL in range(1, 7):
     if DTYPE == "106":
         # Since a large file needs to be downloaded, the commands that allow each file to be downloaded are stored in the shell file.
         f = open(
-            "D:\\research\\stacked\\ALL\\106\\%s\\cc%d\\get_%s%s_cc%d_axel.sh"
+            "\\stacked\\106\\%s\\cc%d\\get_%s%s_cc%d_axel.sh"
             % (band, CAMCOL, band, DTYPE, CAMCOL),
             "w",
         )
@@ -31,7 +31,7 @@ for CAMCOL in range(1, 7):
         f.close()
     elif DTYPE == "206":
         f = open(
-            "D:\\research\\stacked\\ALL\\206\\%s\\cc%d\\get_%s%s_cc%d_axel.sh"
+            "\\stacked\\206\\%s\\cc%d\\get_%s%s_cc%d_axel.sh"
             % (band, CAMCOL, band, DTYPE, CAMCOL),
             "w",
         )

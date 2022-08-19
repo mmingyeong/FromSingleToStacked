@@ -14,6 +14,7 @@ Sphinx = "^5.0.2"
 numpy = "^1.23.1"
 matplotlib = "^3.5.2"
 astropy = "^5.1"
+h5py = "^3.7.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
