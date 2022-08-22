@@ -17,7 +17,6 @@ import numpy as np
 import pandas as pd
 from astropy.io import fits
 
-
 T0 = T1 = time.time()
 run = "206"
 BAND = "g"
@@ -124,7 +123,7 @@ for stacked_no in [34]:
             f_g = pd.read_csv(
                 "D:\\research\\single\\stack%d\\g\\down_g%s_cc%d.sh"
                 % (stacked_no, single_run, camcol),
-                sep="\s+",
+                # sep="\s+",
                 header=None,
             )
             for i in range(len(f_g)):
@@ -203,7 +202,6 @@ RUNS_for_count_S = []
 for i in range(len(RUNS_S)):
     for j in range(len(RUNS_S[i])):
         RUNS_for_count_S.append(RUNS_S[i][j])
-
 
 
 Counter(RUNS_for_count_N).most_common()[0][0]
@@ -401,11 +399,10 @@ print(
 )
 
 
-
 stack34_N_cc1 = []
-for i in range(len(stack34_N)):
-    if stack34_N.values[i, 3] == 1:
-        stack34_N_cc1.append(stack34_N.values[i])
+# for i in range(len(stack34_N)):
+#    if stack34_N.values[i, 3] == 1:
+#        stack34_N_cc1.append(stack34_N.values[i])
 
 # delete stack34_N_cc1
 del stack34_N_cc1
