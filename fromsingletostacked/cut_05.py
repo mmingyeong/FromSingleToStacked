@@ -103,4 +103,3 @@ for coord in cut_center_coord_list_512:
         )
         os.rename(cutout_file, filename)
         shutil.move(filename, f"./data/LowExp/LowExpCut/512/{filename}")
-
