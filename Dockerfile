@@ -5,5 +5,8 @@ LABEL org.opencontainers.image.source https://github.com/mmingyeong/FromSingleTo
 
 COPY . fromsingletostacked
 
+RUN echo "Acquire::Check-Valid-Until \"false\";\nAcquire::Check-Date \"false\";" | cat > /etc/apt/apt.conf.d/10no--check-valid-until
 RUN apt-get -y update
+RUN apt-get upgrade -y 
+RUN apt-get install -y openssh-server
 RUN apt-get -y install build-essential libbz2-dev
