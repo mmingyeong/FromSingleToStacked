@@ -47,9 +47,9 @@ input_flcs = glob.glob(os.path.join('mastDownload', 'HST', '*', '*.fits'))
 
 os.mkdir("data")
 os.mkdir("data/flc_f606w")
-if os.path.isdir("./flc_f606w"):
+if os.path.isdir("data/flc_f606w"):
     for flc in input_flcs:
         shutil.copy(flc, os.path.basename(flc))
-        shutil.move(flc, os.path.join('flc_f606w'))
+        shutil.move(flc, os.path.join('data/flc_f606w'))
     #remove mast download dir now that we've moved the files
     shutil.rmtree('mastDownload') 
