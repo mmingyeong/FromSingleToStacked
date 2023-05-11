@@ -139,7 +139,6 @@ kk = 7
 # kk=6
 # for Fno in range(len(FILE_LIST)-25,len(FILE_LIST)):#len(FILE_LIST)):
 for Fno in range(len(FILE_LIST)):
-
     print(Fno, FILE_LIST[Fno][-14:-7])
     MEAN, MEDIAN, STD = sigma_clipped_stats(fits.open(FILE_LIST[Fno])[0].data)
     plt.imshow(

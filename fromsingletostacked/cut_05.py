@@ -6,26 +6,23 @@
 # @Filename: cut_05.py
 # This will cut the images.
 
-from astrocut import fits_cut
-from scipy import ndimage, datasets
-
-from astropy.io import fits
-from astropy.coordinates import SkyCoord
-from astropy.visualization import ZScaleInterval
-from astropy import wcs
-from astropy import units as u
-from astropy.utils.data import get_pkg_data_filename
-
-import warnings
 import glob
 import os
 import shutil
 import warnings
 from datetime import date
+
 import matplotlib.pyplot as plt
 import numpy as np
-
-from mpdaf.obj import Image, WCS
+from astrocut import fits_cut
+from astropy import units as u
+from astropy import wcs
+from astropy.coordinates import SkyCoord
+from astropy.io import fits
+from astropy.utils.data import get_pkg_data_filename
+from astropy.visualization import ZScaleInterval
+from mpdaf.obj import WCS, Image
+from scipy import datasets, ndimage
 
 os.mkdir("data/HighExpCut")
 os.mkdir("data/LowExp/LowExpCut")
@@ -36,9 +33,11 @@ os.mkdir("data/LowExp/LowExpCut/512")
 input_file = "hlsp_udf_hst_acs-wfc_all_f606w_v1_drz_315_rot.fits"
 cutout_size = [6950, 6950]
 
-center_coord = SkyCoord(53.1620, -27.7914, unit='deg')
-output_dir="./data"
-cutout_file = fits_cut(input_file, center_coord, cutout_size, single_outfile=True, output_dir=output_dir)
+center_coord = SkyCoord(53.1620, -27.7914, unit="deg")
+output_dir = "./data"
+cutout_file = fits_cut(
+    input_file, center_coord, cutout_size, single_outfile=True, output_dir=output_dir
+)
 high_exp_filename = f"{output_dir}/level5_sqaurecut.fits"
 os.rename(cutout_file, high_exp_filename)
 
@@ -56,36 +55,52 @@ for ra in pix_512_rang:
         cut_center_coord_list_512.append(cut_center_coord)
 
 for coord in cut_center_coord_list_512:
-    cutout_file = fits_cut(high_exp_filename, coord, cutout_size, single_outfile=True, output_dir=".")
-    filename = "{}_{}_cut.fits".format(os.path.basename(input_file).rstrip('_sqaurecut.fits'), os.path.basename(cutout_file).rstrip('_astrocut.fits'))
+    cutout_file = fits_cut(
+        high_exp_filename, coord, cutout_size, single_outfile=True, output_dir="."
+    )
+    filename = "{}_{}_cut.fits".format(
+        os.path.basename(input_file).rstrip("_sqaurecut.fits"),
+        os.path.basename(cutout_file).rstrip("_astrocut.fits"),
+    )
     os.rename(cutout_file, filename)
     shutil.move(filename, f"./data/HighExpCut/{filename}")
 
 
 # first square cut for low exposure image
-input_flcs = glob.glob('./data/LowExp/LowExpRot/*.fits')
+input_flcs = glob.glob("./data/LowExp/LowExpRot/*.fits")
 cutout_size = [6950, 6950]
 
-center_coord = SkyCoord(53.1620, -27.7914, unit='deg')
+center_coord = SkyCoord(53.1620, -27.7914, unit="deg")
 for input_file in input_flcs:
-    cutout_file = fits_cut(input_file, center_coord, cutout_size, single_outfile=True, output_dir=".")
-    filename = "{}_{}.fits".format(os.path.basename(input_file).rstrip('.fits'), os.path.basename(cutout_file).rstrip('.fits'))
+    cutout_file = fits_cut(
+        input_file, center_coord, cutout_size, single_outfile=True, output_dir="."
+    )
+    filename = "{}_{}.fits".format(
+        os.path.basename(input_file).rstrip(".fits"),
+        os.path.basename(cutout_file).rstrip(".fits"),
+    )
     os.rename(cutout_file, filename)
-    filename = "{}_{}_squrecut.fits".format(os.path.basename(input_file).rstrip('_315_rot.fits'), os.path.basename(cutout_file).rstrip('_astrocut.fits'))
+    filename = "{}_{}_squrecut.fits".format(
+        os.path.basename(input_file).rstrip("_315_rot.fits"),
+        os.path.basename(cutout_file).rstrip("_astrocut.fits"),
+    )
     os.rename(cutout_file, filename)
     shutil.move(filename, f"./data/LowExp/LowExpCut/sqaure/{filename}")
 
-# image cut using astrocut 
-input_flcs = glob.glob('./data/LowExp/LowExpCut/sqaure/*.fits')
-#center_coord = SkyCoord("53.1349957 -27.7809885", unit='deg')
+# image cut using astrocut
+input_flcs = glob.glob("./data/LowExp/LowExpCut/sqaure/*.fits")
+# center_coord = SkyCoord("53.1349957 -27.7809885", unit='deg')
 cutout_size = [512, 512]
 
 for coord in cut_center_coord_list_512:
     for input_file in input_flcs:
-        try:
-            cutout_file = fits_cut(input_file, coord, cutout_size, single_outfile=True, output_dir=".")
-            filename = "{}_{}_cut.fits".format(os.path.basename(input_file).rstrip('.fits'), os.path.basename(cutout_file).rstrip('_astrocut.fits'))
-            os.rename(cutout_file, filename)
-            shutil.move(filename, f"./data/LowExp/LowExpCut/512/{filename}")
-        except:
-            pass
+        cutout_file = fits_cut(
+            input_file, coord, cutout_size, single_outfile=True, output_dir="."
+        )
+        filename = "{}_{}_cut.fits".format(
+            os.path.basename(input_file).rstrip(".fits"),
+            os.path.basename(cutout_file).rstrip("_astrocut.fits"),
+        )
+        os.rename(cutout_file, filename)
+        shutil.move(filename, f"./data/LowExp/LowExpCut/512/{filename}")
+

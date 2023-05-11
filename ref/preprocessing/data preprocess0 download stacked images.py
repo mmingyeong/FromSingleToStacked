@@ -25,7 +25,6 @@ for CAMCOL in range(1, 7):
         )
         f.write("wget -a -n 2")
         for i in range(62, 801):
-
             f.write(
                 " http://das.sdss.org/raw/200006/2/corr/%d/fpC-200006-%s%d-%04d.fit.gz"
                 % (CAMCOL, band, CAMCOL, i)

@@ -6,20 +6,20 @@
 # @Filename: filtering_06.py
 # This will filter bad images and split datasets.
 
-from astropy.io import fits
-from sklearn.model_selection import train_test_split
-
 import glob
 import os
-import numpy as np
 import shutil
+
+import numpy as np
+from astropy.io import fits
+from sklearn.model_selection import train_test_split
 
 input_flcs = glob.glob("data/LowExp/LowExpCut/512/*.fits")
 HighExp_flcs = glob.glob("data/HighExpCut/*.fits")
 
 for file in input_flcs:
-# check output image
-    hdu = fits.open(file)  
+    # check output image
+    hdu = fits.open(file)
     data = hdu[0].data
     zero = 0
 
@@ -31,8 +31,8 @@ for file in input_flcs:
             pass
 
 for file in HighExp_flcs:
-# check output image
-    hdu = fits.open(file)  
+    # check output image
+    hdu = fits.open(file)
     data = hdu[0].data
     zero = 0
 
@@ -53,7 +53,7 @@ os.mkdir("dataset/Train/Target")
 Train_input, Test_input = train_test_split(input_flcs)
 
 for file in Train_input:
-    shutil.move(file, "dataset/Train/Input") 
+    shutil.move(file, "dataset/Train/Input")
 
 for file in Test_input:
     shutil.move(file, "dataset/Test/Input")
