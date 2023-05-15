@@ -107,6 +107,7 @@ for visit_num in visit_nums:
         clean=True,
     )
 
+import shutil
 input_flcs = glob.glob("./*_4stacked.fits")
 os.mkdir("data/LowExp")
 for file in input_flcs:
